@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Generating JavaScript</title>
+  <script src="../../google_blockly_core_files/blockly_compressed.js"></script>
+
+  <script src="../../blocks/fill_textbox.js"></script>
+  <script src="../../blocks/click_button.js"></script>
+  <script src="../../blocks/mouse_over.js"></script>
+  <script src="../../blocks/wait.js"></script>
+  <script src="../../blocks/block_separator.js"></script>
+  <script src="../../blocks/take_screenshot.js"></script>
+
+  <script src="../../generators/javascript.js"></script>
+  <script src="../../generators/javascript/fill_textbox.js"></script>
+
+  <script src="../../google_blockly_core_files/msg/js/en.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+<body>
+  <h1><a href="../index.html">Demos</a> &gt; Generating Selenium code</h1>
+
+  <p>This is a simple demo of generating Selenium code from blocks.</p>
+
+  <p>
+    <button onclick="showCode()">Show Code</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+  <xml id="toolbox" style="display: none">
+    <block type="fill_textbox"></block>
+    <block type="click_button"></block>
+    <block type="mouse_over"></block>
+    <block type="wait"></block>
+    <block type="block_separator"></block>
+    <block type="take_screenshot"></block>
+  </xml>
+
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: '../../google_blockly_core_files/media/',
+         toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(workspace,
+        document.getElementById('startBlocks'));
+
+    function showCode() {
+      // Generate JavaScript code and display it.
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      alert(code);
+    }
+  </script>
+
+</body>
+</html>
